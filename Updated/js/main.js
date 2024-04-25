@@ -45,21 +45,24 @@ const sr = ScrollReveal({
     origin: 'top',
     distance: '60px',
     duration: 2000,
-    delay: 100,
+    delay: 150,
 //     reset: true
 });
 
 sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{}); 
 sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400}); 
 sr.reveal('.home__social-icon',{ interval: 200}); 
-sr.reveal('.skills__data, .work__img, .contact__input',{interval: 200}); 
+sr.reveal('.skills__data, .work_section, .contact__input',{interval: 200}); 
 
 
 (function (global) {
 
 var ws = {};
 
-var workHtml = "snippets/worksection.html";
+var workHtml = "snippets/maincontent.html";
+var project1Html = "snippets/project1.html";
+var project2Html = "snippets/project2.html";
+var project3Html = "snippets/project3.html";
 
 var insertHtml = function (selector, html) {
     var targetElem = document.querySelector(selector);
@@ -72,8 +75,7 @@ var showLoading = function (selector) {
     insertHtml(selector, html);
 };
 
-document.addEventListener("DOMContentLoaded", function(event) {
-
+document.addEventListener("DOMContentLoaded", function (event) {
     showLoading("#work");
     $ajaxUtils.sendGetRequest(
         workHtml,
@@ -81,8 +83,44 @@ document.addEventListener("DOMContentLoaded", function(event) {
             document.querySelector("#work")
              .innerHTML = responseText;
         },
-        false);
+        false
+    );
 });
+
+ws.loadProject1 = function () {
+    showLoading("#work");
+    $ajaxUtils.sendGetRequest(
+        project1Html,
+        function (responseText) {
+            document.querySelector("#work")
+            .innerHTML = responseText;
+        },
+        false
+        );
+};
+ws.loadProject2 = function () {
+    showLoading("#work");
+    $ajaxUtils.sendGetRequest(
+        project2Html,
+        function (responseText) {
+            document.querySelector("#work")
+            .innerHTML = responseText;
+        },
+        false
+        );
+};
+ws.loadProject3 = function () {
+    showLoading("#work");
+    $ajaxUtils.sendGetRequest(
+        project3Html,
+        function (responseText) {
+            document.querySelector("#work")
+            .innerHTML = responseText;
+        },
+        false
+        );
+};
+
 
 global.$ws = ws;
 
